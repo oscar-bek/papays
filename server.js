@@ -1,10 +1,11 @@
-const http = require("http");
+const dotenv = require("dotenv");
+dotenv.config();
 
+const http = require("http");
 const mongodb = require("mongodb");
 
 let db;
-const connectionString = 
-"mongodb+srv://oscar:WQYZgciD9w9aSyvr@cluster0.jpes8nx.mongodb.net/papay?retryWrites=true&w=majority"
+const connectionString = process.env.MONGO_URL;
 
 mongodb.connect(connectionString, {
     useNewUrlParser: true,
@@ -19,7 +20,7 @@ mongodb.connect(connectionString, {
     
     const app = require("./app");
     const server = http.createServer(app);
-    let PORT = 3000;
+    let PORT = process.env.PORT || 3003;
     server.listen(PORT, function () {
     console.log(`The server is running successful on port: ${PORT}, http://localhost:${PORT}`
     );
