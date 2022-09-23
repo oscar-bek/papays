@@ -4,7 +4,6 @@ dotenv.config();
 const http = require("http");
 const mongodb = require("mongodb");
 
-let db;
 const connectionString = process.env.MONGO_URL;
 
 mongodb.connect(connectionString, {
