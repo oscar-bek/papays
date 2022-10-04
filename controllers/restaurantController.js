@@ -69,7 +69,7 @@ restaurantController.loginProcess = async (req, res) => {
 };
 restaurantController.logoutProcess = (req, res) => {
     console.log("GET cont.logout");
-    res.send("siz logout sahifadasiz");
+    res.json("siz logout sahifadasiz");
 };
 
 restaurantController.validateAuthRestaurant = (req, res, next) => {
