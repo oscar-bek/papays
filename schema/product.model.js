@@ -75,7 +75,7 @@ const productSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 productSchema.index(
-    {restaurant_mb_id: 1, product_name: 1, product_size: 1, product_volume: 1}, /// 
+    {restaurant_mb_id: 1, product_name:1, product_size: 1, product_volume: 1},  
     {unique: true}
     );
 

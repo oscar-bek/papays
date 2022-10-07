@@ -11,14 +11,13 @@ class Product {
     async addNewProductData(data,member) {
         try {
             data.restaurant_mb_id = shapeIntoMongooseobjectId(member._id);
-           
-
+            
             const new_product = new this.productModel(data);
             const result = await new_product.save();
-            return result;
 
-            assert.ok(result, Definer.product_err1);            
-            return true;
+            assert.ok(result, Definer.product_err1);  
+            return result;
+ 
         } catch(err) {
             throw err;
         }
