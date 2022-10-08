@@ -1,16 +1,16 @@
+
 //**  functiondagi ikkita argumentlardan birinigina return qilish */
 
-let compitation = a = ['musobaqa', 'golibi', 'bolgan', 'kishi'], b = 'anvar';
-const skip = compitation.filter((ele) => {
-    return ele > b;
+let a = ['musobaqa', 'golibi', 'bolgan', 'kishi', 'anvar'];
+let b = 'anvar';
+const result = a.filter((ele) => {
+    if(ele.includes(b)){
+        return false;
+    } else {
+      return true;
+    }
+    
 });
 
-console.log(skip);
+console.log(result);
 
-// let comp = c = ['musobaqa', 'golibi', 'bolgan', 'kishi'], d = 'anvar';
-
-
-// comp.filter(function(c, d) { 
-//       delete comp.d;
-//     }); 
-//   console.log(comp);
