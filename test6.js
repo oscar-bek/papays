@@ -1,6 +1,9 @@
+
 //** arraydagi ismlardan 2tasini ajratib olish  */
 
 const list = ["orifjon", "david", "oscar", "shawn"," leo"];
+// const result = list.slice(3);
+// console.log("result:", result);
 
 
 const test = list.filter((ele) =>{

@@ -1,3 +1,4 @@
+
 //**  functiondagi ikkita argumentlardan birinigina return qilish */
 
 let compitation = a = ['musobaqa', 'golibi', 'bolgan', 'kishi'], b = 'anvar';
@@ -14,3 +15,11 @@ console.log(skip);
 //       delete comp.d;
 //     }); 
 //   console.log(comp);
+
+let c = ['musobaqa', 'golibi'];
+let d = 'anvar'
+function golib(c, d) {
+    return d = false;
+};
+console.log(a);
+
