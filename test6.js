@@ -1,6 +1,7 @@
 
 //** arraydagi ismlardan 2tasini ajratib olish  */
 
+
 const list = ["orifjon", "david", "oscar", "shawn", "leo"];
 let example = ["orifjon", "leo"]; 
 
