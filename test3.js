@@ -3,14 +3,16 @@
 //**agar bosh qiymatlar bolsa ularni delete qiilib qiymati bor arrayni qaytarsin */
 
 
+const guys = [null, 'Leo', 'Walter', 'shawn', 'John'];
 
-const months = [null, 'Lewo', 'Walter', 'shawn', 'John'];
-
-
-const guys = ['', 'Leo', 'Walter', 'shawn', 'John'];
-
-const result = guys.map(function(item) {
-    return item == '' ? 'david' : item;
+const result = guys.filter((ele) => {
+    if(guys.includes(null)) {
+        return ele;
+    } else {
+        return false
+    }
+    
 });
+
 
 console.log(result);

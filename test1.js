@@ -1,15 +1,6 @@
 
 //** quyidagi arraydagi raqamlarni reverse ishlatmasdan teskaricha hosil qilish */ 
 
-let num = [2, 34, 1, 34, 54, 4, 109, 45, 999, 5, 23]
-
-
-.reduceRight(function(previous, current) { 
-  previous.push(current); 
-    return previous; }, []); 
-console.log(num)
-
-
 
 let number = [2, 34, 1, 34, 54, 4, 109, 45, 999, 5, 23];
 let n = number.length-1;
