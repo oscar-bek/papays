@@ -7,18 +7,12 @@ async hashPassword(password) {
  
   const hash = await bcrypt.hash(password, 5);
 
-  console.log([hash]); 
+  console.log(hash); 
 }
 
-hideNumber(phone) {
-  let hideNum = [];
-	for(let i = 0; i < phone.length; i++){
-    if(i < phone.length-4){
-      hideNum.splice("*");
-    }else{
-      hideNum.push(phone[i]);
-    }
-  }
+asynchideNumber(phone) {
+  let hideNum = 
+  
 
   console.log(hideNum);
 }
