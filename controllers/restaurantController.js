@@ -74,7 +74,6 @@ restaurantController.loginProcess = async (req, res) => {
                 result.mb_type === "ADMIN"
                 ? res.redirect("/resto/all-restaurant")
                 : res.redirect("/resto/products/menu");
-                console.log(result);
               });
     } catch (err) {
         console.log(`ERROR, cont/loginProcess, ${err.message}`);
