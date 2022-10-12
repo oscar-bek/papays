@@ -5,20 +5,22 @@
 <body>
    <form class="login_container" action="/resto/login" method="POST">
       <div class="login_frame">
-         <div class="login_top">
+          
+          <div class="login_top">
            <span>Saytga Kirish</span>
            <div>
             Bosh Sahifaga Qaytish 
-            <a href="/resto" style="color: #644afb">Home</a>
+            <a href="/resto" style="color: #6440fb;">HOME</a>
          </div>
            <p>
             Ro'yhatdan o'tganmisiz?
-            <a href="/resto/signup"  style="color: #644afb">Ro'yhatdan o'tish</a>
+           <a href="/resto/signup" style="color: #6440fb;">Ro'yhatdan o'tish</a>
          </p>
          </div>
+         
          <div class="login_input_frame">
             <div class="login_input_container">
-               <label>Foydalanuvchii ismi:</label>
+               <label>Foydalanuvchi ismi:</label>
                <input 
                 type="text"
                 name="mb_nick"
@@ -31,7 +33,7 @@
                <label>Password kiriting</label>
                <input 
                 type="password" 
-                name="mb_passsword" 
+                name="mb_password" 
                 placeholder="Password"
                 value=""
                 required 
@@ -40,6 +42,7 @@
          </div>
 
          <button class="login_btn btn" name="login" type="submit">Kirish</button>
+      
       </div>
    </form>
   
