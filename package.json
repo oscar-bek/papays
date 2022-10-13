@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node test9.js",
     "dev": "nodemon test9.js",
-    "train": "nodemon test9-2.js",
+    "train": "nodemon test9.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Behzod",
