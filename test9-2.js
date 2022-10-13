@@ -16,9 +16,17 @@ function sortString (str) {
             text.push(e)
         }
     })
+
     return [text.length, num.length]
 }
 
- const result = sortString(("abs365fhd387");
- console.log("javob", result);
+//  const result = sortString(("abs365fhd387");
+//  console.log("javob", result);
+
+//     return {text, num};
+// }
+
+//  const result = sortString("abs365fhd387");
+//  console.log(result);
+
 
