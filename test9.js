@@ -1,18 +1,21 @@
+
+// console.log da har xil harflar yozish orqali arraydagi o'sha harflar bor bo'lgan elementni olish
+
+
 const animal_list = ["fox", "ant", "bird", "lion", "wolf", "deer", "bear",
     "frog", "hen", "mole", "duck", "goat", "dog", "cat", "bat", "cock", "cow"];
 
-    function findAnimals(...letters){
-        
-        return animal_list.filter(w => letters.every(l => w.includes(l)));
-      }
 
-    const javob = findAnimals('dcgaot');
-    console.log("Javob:", javob);
 
-function find(...letters){
-    var words = ["super", "phone", "wood"]
-    return words.filter(w => letters.every(l => w.includes(l)));
+    function findAnimals(txt){
+      newArr = [];
+      animal_list.map(item => {
+          txt.includes(item) ? newArr.push(item) : '';
+      });
+    return newArr;
   }
+      
   
-  
-  console.log(find("h","n","e"));
+    const result = findAnimals("dgoat");
+    console.log(result);
+ 
