@@ -4,9 +4,9 @@
   "description": "bu bizning dostavka loyihamiz",
   "main": "server.js",
   "scripts": {
-    "start": "node test8.js",
-    "dev": "nodemon server.js",
-    "train": "nodemon train.js",
+    "start": "node test9.js",
+    "dev": "nodemon test9.js",
+    "train": "nodemon test9.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Behzod",
