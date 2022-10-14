@@ -11,8 +11,9 @@ class Member {
     async signupData(input) {
         try {
 
-          const salt = await bcrypt.genSalt();
+          const salt = bcrypt.genSalt();
           input.mb_password = await bcrypt.hash(input.mb_password, salt);
+          
           const new_member = new this.memberModel(input);
 
           let result;
