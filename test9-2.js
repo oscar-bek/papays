@@ -6,6 +6,7 @@
 
  
 function sortString (str) {
+
     let obj = {
         letter: 0,
         digit: 0,
@@ -23,5 +24,29 @@ function sortString (str) {
  console.log("javob", result);
 
     
+
+    let textArray = str.split('')
+    let text = []
+    let num = []
+    textArray.forEach(e=>{
+        if (e>-1) {
+            num.push(e)
+        } else {
+            text.push(e)
+        }
+    })
+
+    return [text.length, num.length]
+
+
+//  const result = sortString(("abs365fhd387");
+//  console.log("javob", result);
+
+//     return {text, num};
+// }
+
+//  const result = sortString("abs365fhd387");
+//  console.log(result);
+
 
 
