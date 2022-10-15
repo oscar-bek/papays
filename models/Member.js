@@ -11,14 +11,15 @@ class Member {
     async signupData(input) {
         try {
 
-          const salt = bcrypt.genSalt();
+          const salt = await bcrypt.genSalt();
           input.mb_password = await bcrypt.hash(input.mb_password, salt);
           
           const new_member = new this.memberModel(input);
 
           let result;
           try {
-           result = await new_member.save();
+            result = await new_member.save();
+           
           } catch (mongo_err) {
             console.log(mongo_err);
             throw new Error(Definer.auth_err1);
