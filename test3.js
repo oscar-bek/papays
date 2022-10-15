@@ -9,7 +9,7 @@ const result = guys.filter((ele) => {
     if(guys.includes(null)) {
         return ele;
     } else {
-        return false
+        return false;
     }
     
 });

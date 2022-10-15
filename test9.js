@@ -2,23 +2,21 @@
 // console.log da har xil harflar yozish orqali arraydagi o'sha harflar bor bo'lgan elementni olish
 
 
+
+
+
+
 const animal_list = ["fox", "ant", "bird", "lion", "wolf", "deer", "bear",
     "frog", "hen", "mole", "duck", "goat", "dog", "cat", "bat", "cock", "cow"];
 
     function findAnimals(txt){
-      let res = txt.filter(i => animal_list.includes(i));
-      return res;
-    }
-  //   function findAnimals(txt){
-  //     newArr = [];
-  //     animal_list.map(item => {
-  //         txt.includes(item) ? newArr.push(item) : '';
-  //     });
-  //   return newArr;
-  // }
+
+      var result = animal_list.filter((x) = txt);
+      return result;
+  }
       
   
-    const result = findAnimals("dgoat");
+    const result = findAnimals(dgoat);
     console.log(result);
     
     

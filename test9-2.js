@@ -25,18 +25,18 @@ function sortString (str) {
 
     
 
-    let textArray = str.split('')
-    let text = []
-    let num = []
-    textArray.forEach(e=>{
-        if (e>-1) {
-            num.push(e)
-        } else {
-            text.push(e)
-        }
-    })
+    // let textArray = str.split('')
+    // let text = []
+    // let num = []
+    // textArray.forEach(e=>{
+    //     if (e>-1) {
+    //         num.push(e)
+    //     } else {
+    //         text.push(e)
+    //     }
+    // })
 
-    return [text.length, num.length]
+    // return [text.length, num.length]
 
 
 //  const result = sortString(("abs365fhd387");
