@@ -25,19 +25,18 @@ productController.addNewProduct = async (req, res) => {
         });
 
         const result = await product.addNewProductData(data, req.member);
-        const html = `<scrypt>
-                       alert(new product added successfully);
-                       window.location.replace('/resto/product/menu');
-                     </scrypt>`;
-                     res.end(html);
+        const html = `<script>
+                       alert('new product added successfully');
+                       window.location.replace('/resto/products/menu');
+                     </script>`;
+        res.end(html);
         
-             
-         res.end("ok");
     } catch(err) {
         console.log(`ERROR, addNewProduct, ${err.message}`);
          
     }
-}
+};
+
 productController.updateChosenProduct = async (req, res) => {
     try {
         console.log("POST cont/updateChosenProduct");
