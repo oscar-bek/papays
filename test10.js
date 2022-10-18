@@ -7,8 +7,7 @@ let K = 4
 
 const findIndex = (arr, n, K) => {
 
-    let index = 
-    arr
+    let index = arr
       .sort((a, b) => a - b) // tartiblab olamiz
       .findIndex((e) => K <= e)  // kiriladigan raqamni o'rnini belgilaymiz
       return index === -1 ? n : index  // Agar num sortedArray oxirida tegishli bo'lsa yoki arr bo'sh bo'lsa arr uzunligini qaytarsin

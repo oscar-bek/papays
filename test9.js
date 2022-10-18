@@ -5,18 +5,23 @@
 
 
 
-
 const animal_list = ["fox", "ant", "bird", "lion", "wolf", "deer", "bear",
     "frog", "hen", "mole", "duck", "goat", "dog", "cat", "bat", "cock", "cow"];
 
-    function findAnimals(txt){
+function findAnimals(txt) {
+    const answer = animal_list.filter(ele => {
+        const animal = ele.split('');
+        const result = animal.map(letter => {
+            if (txt.includes(letter)) return true;
+            else return false;
+        });
+        return !result.includes(false);
+    });
 
-      var result = animal_list.filter((x) = txt);
-      return result;
-  }
-      
-  
-    const result = findAnimals(dgoat);
-    console.log(result);
+    return answer;
+}
+
+const javob = findAnimals('adkjdforglt');
+console.log('Javob:', javob);
     
     
