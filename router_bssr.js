@@ -15,7 +15,10 @@ router_bssr.get("/", restaurantController.home);
 
 router_bssr
  .get("/sign-up", restaurantController.getSignupMyRestaurant)
- .post("/sign-up", uploader_members.single("restaurant_img"), restaurantController.signupProcess);
+  .post(
+    "/sign-up", uploader_members.single( "restaurant_img" ),
+    restaurantController.signupProcess
+  );
 router_bssr
   .get("/login", restaurantController.getLoginMyRestaurant)
   .post("/login", restaurantController.loginProcess);
@@ -35,5 +38,8 @@ router_bssr.post(
     productController.updateChosenProduct
   );
 
+
+router_bssr.get( "/all-restaurant", restaurantController.validateAdmin,
+  restaurantController.getAllRestaurants )
 
 module.exports = router_bssr;
