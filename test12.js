@@ -2,8 +2,7 @@
 // => findMeSundays( 2014, 2022 )__bu function 1 - yanvar
 // => yakshanba bolgan yillarni bir arrayga joylab return qilsin;
 
-const e = require("express");
-const constants = require("mongodb/lib/constants");
+
 
 const findMeSundays = function (a, b) {
   for (let year = a; year <= b; year++) {
@@ -14,3 +13,6 @@ const findMeSundays = function (a, b) {
 };
 
 findMeSundays(2014, 2050);
+
+
+
