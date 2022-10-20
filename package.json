@@ -7,7 +7,7 @@
     "start": "node test10.js",
     "dev": "nodemon test10.js",
     "train": "nodemon test9.js",
-    "train": "nodemon test10.js",
+    "train": "nodemon test12.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Behzod",
