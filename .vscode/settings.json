@@ -1,7 +1,3 @@
 {
-  "editor.formatOnSave": true,
-  "prettier.insertPragma": false,
-  "prettier.requirePragma": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "html.format.enable": true
+  "prettier.requireConfig": true
 }

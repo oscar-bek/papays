@@ -136,7 +136,7 @@ restaurantController.validateAdmin = (req, res, next) => {
   }
     
   
-};
+};s
 
 restaurantController.getAllRestaurants = async ( req, res ) =>
 {
@@ -157,14 +157,16 @@ restaurantController.getAllRestaurants = async ( req, res ) =>
   }
 };
 
+
 restaurantController.updateRestaurantByAdmin = async (req, res) => {
   try
   {
-    console.log( "GET cont/updateRestaurantByAdmin" );
+     console.log( "GET cont/updateRestaurantByAdmin" );
     const restaurant = new Restaurant();
     const result = await restaurant.updateRestaurantByAdminData( req.body );
     await res.json({state: "success", data: result});
   } catch ( err ){
+
     console.log( `ERROR, cont/updateRestaurantByAdmin, ${ err.message }` );
     res.json( { state: "fail", message: err.message } );
   }

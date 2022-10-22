@@ -69,18 +69,21 @@
         $(function() {
 
             //manipulate restaursnts top features
-            $(".mb_top").on('change', function(e) {
+            $(".mb_top").on('change', async function(e) {
+                try {
                 const id = e.target.id;
                 const mb_top = e.target.checked ? 'Y' : 'N' ;
+                const response = await axios
+                .post('/resto/all-restaurant/edit', {id: id, mb_top: mb_top})
                 
-                axios.post('/resto/all-restaurant/edit', {id: id, mb_top: mb_top})
-                .then(response => {
+
                     const result = response.data;
                     if(result.state === 'success') alert('successfully updated');
                    
                     else alert(result.message);
-                })
-                .catch(err => console.log(err));
+                } catch(err) {
+                    console.log(err);
+                }
 
             });
           

@@ -9,8 +9,7 @@ class Member {
     }
 
     async signupData(input) {
-        try {
-
+        try {          
           const salt = await bcrypt.genSalt();
           input.mb_password = await bcrypt.hash(input.mb_password, salt);
           
