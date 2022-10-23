@@ -1,16 +1,22 @@
 // ikkita stringni o'ziga argument qilib olib, har ikkalasida qatnashgan harflarni bir yangi arrayda return qilib qaytaradigan function yasang
-let a = "hello";
-let b = "everyone";
 
 
-findSimilarLetters = (a, b) => {
-let array = a + b;
-let arr = array.split();
+function findSimilarLetters(a, b) { 
+  let similar = "";
+  for (let i = 0; i < a.length; i += 1) {
+    if (similar.indexOf(a[i]) === -1) {
+      if (b.indexOf(a[i]) !== -1) {
+        similar += a[i];
+      }
+    }
+  }
+  return similar.split();
 
-console.log(arr);
-}
+};
+ 
 
- findSimilarLetters(a, b);
 
+
+ console.log(findSimilarLetters("hello", "everyone"));
 
 
