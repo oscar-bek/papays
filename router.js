@@ -11,14 +11,10 @@ const memberController = require("./controllers/memberController");
 router.post("/signup", memberController.signup);
 router.post("/login", memberController.login);
 router.get("/logout", memberController.logout);
-
-//boshqa routerlar
-router.get("/menu", (req, res) => {
-    res.send("Menu sahifasidasiz");
-});
-
-router.get("/comunity", (req, res) => {
-    res.send("Jamiyat sahifasidasiz");
-});
+router.get("/check-me", memberController.checkMyAuthentication);
+router.get("/member/:id",
+    memberController.retrieveAuthMember,
+    memberController.getChosenMember
+);       
 
 module.exports = router;

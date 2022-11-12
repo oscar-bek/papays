@@ -136,7 +136,7 @@ restaurantController.validateAdmin = (req, res, next) => {
   }
     
   
-};s
+};
 
 restaurantController.getAllRestaurants = async ( req, res ) =>
 {
