@@ -2,16 +2,45 @@ const Product = require("../models/Product");
 const assert = require("assert");
 const Definer = require("../lib/mistake");
 
- let productController = module.exports;
+let productController = module.exports;
+
+/***************************************************
+ *           REST API RELATED PRODUCT METHODS         *
+ **************************************************/
 
 productController.getAllProducts = async (req, res) => {
     try {
-        console.log("GET cont/getAllProducts");
-    } catch(err) {
-        console.log(`ERROR, getAllProducts, ${err.message}`);
-        res.json({ state: "fail", message: err.message }); 
+        console.log("POST: cont/getAllProducts");
+        const product = new Product();
+        const hello = await product.getAllProductsData(req.member, req.body);
+        
+        res.json({ state: "success", data: hello });        
+    } catch (err)
+    {
+        console.log(`ERORR, cont/getAllProducts, ${err.message}`);
+        res.json({ state: "fail", message: err.message });
     }
 }
+
+productController.getChosenProduct = async (req, res) => {
+    try {
+        console.log("GET: cont/getChosenProduct");
+        const product = new Product();
+        const id = req.params.id;
+        const result = await product.getChosenProductData(req.member, id);    //await missed :)
+        
+        res.json({ state: "success", data: result });        
+    } catch (err)
+    {
+        console.log(`ERORR, cont/getChosenProduct, ${err.message}`);
+        res.json({ state: "fail", message: err.message });
+    }
+}
+
+/***************************************************
+ *            BSSR RELATED PRODUCT METHODS         *
+ **************************************************/
+
 productController.addNewProduct = async (req, res) => {
     try {
         console.log("POST cont/addNewProduct");
