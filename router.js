@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const memberController = require("./controllers/memberController");
 const productController = require('./controllers/productController');
+const restaurantController = require('./controllers/restaurantController');
 
 /*************************************
  *         REST API                  *
@@ -31,13 +32,9 @@ router.get("/products/:id",
    //param orqali
 
 
-   //boshqa routerlar 
-router.get("/menu", function(req, res) {
-    res.send("You are on MenuPage");
-});
-
-router.get("/community", function(req, res) {
-    res.send("You are on CommunityPage");
-});
+   //Restaurant related routers
+   router.get("/restaurants", 
+   memberController.retrieveAuthMember, 
+   restaurantController.getRestaurants)
 
 module.exports = router;

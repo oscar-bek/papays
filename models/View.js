@@ -1,4 +1,4 @@
-const memberModel = require("../schema/member.model");
+const MemberModel = require("../schema/member.model");
 const ViewModel = require("../schema/view.model");
 const ProductModel = require("../schema/product.model");
 
