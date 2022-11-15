@@ -54,7 +54,7 @@ async getChosenRestaurantData(member, id) {
         if (member)
         {
            const member_obj = new Member();
-           await member_obj.viewChosenItemByMember(member, id, "member");
+              await member_obj.viewChosenItemByMember(member, id, "member");
         }
 
         const result = await this.memberModel
