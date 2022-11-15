@@ -54,8 +54,8 @@ class Product {
   
            if (member)
            {
-              const member_obj = new Member();
-              await member_obj.viewChosenItemByMember(member, id, "product");
+              const member_obj = new Member();  
+                 await member_obj.viewChosenItemByMember(member, id, "product");
            }
   
            const result = await this.productModel.aggregate([
