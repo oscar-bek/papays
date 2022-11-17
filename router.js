@@ -25,22 +25,15 @@ router.post(
 	productController.getAllProducts,
 );
 
-router.get('/products/:id',
- memberController.retrieveAuthMember, 
-productController.getChosenProduct);
+router.get('/products/:id', memberController.retrieveAuthMember, productController.getChosenProduct);
 //param orqali
 
 //Restaurant related routers
-router.get('/restaurants', 
-memberController.retrieveAuthMember,
- restaurantController.getRestaurants);
-router.get('/restaurants/:id', 
-memberController.retrieveAuthMember, 
-restaurantController.getChosenRestaurant);
+router.get('/restaurants', memberController.retrieveAuthMember, restaurantController.getRestaurants);
+router.get('/restaurants/:id', memberController.retrieveAuthMember, restaurantController.getChosenRestaurant);
 
 // Order related routers
-router.post('/orders/create', 
-memberController.retrieveAuthMember, 
-orderController.createOrder);
+router.post('/orders/create', memberController.retrieveAuthMember, orderController.createOrder);
+router.get('/order', memberController.retrieveAuthMember, orderController.getMyOrders);
 
 module.exports = router;
