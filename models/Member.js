@@ -1,119 +1,104 @@
-const MemberModel = require("../schema/member.model");
-const Definer = require("../lib/mistake");
-const assert = require("assert");
+const MemberModel = require('../schema/member.model');
+const Definer = require('../lib/mistake');
+const assert = require('assert');
 const bcrypt = require('bcryptjs');
-const View = require("./View");
-const { shapeIntoMongooseObjectId } = require("../lib/config");
+const View = require('./View');
+const { shapeIntoMongooseObjectId } = require('../lib/config');
 
 class Member {
-    constructor() {
-        this.memberModel = MemberModel;
-    }
+	constructor() {
+		this.memberModel = MemberModel;
+	}
 
-    async signupData(input) {
-        try {          
-          const salt = await bcrypt.genSalt();
-          input.mb_password = await bcrypt.hash(input.mb_password, salt);
-          
-          const new_member = new this.memberModel(input);
+	async signupData(input) {
+		try {
+			const salt = await bcrypt.genSalt();
+			input.mb_password = await bcrypt.hash(input.mb_password, salt);
 
-          let result;
-          try {
-            result = await new_member.save();
-           
-          } catch (mongo_err) {
-            console.log(mongo_err);
-            throw new Error(Definer.auth_err1);
-      
-          }
-    
-          result.mb_password = "";
+			const new_member = new this.memberModel(input);
 
-          return result;
-        } catch (err) {
-          throw err;
-        }
-      }
+			let result;
+			try {
+				result = await new_member.save();
+			} catch (mongo_err) {
+				console.log(mongo_err);
+				throw new Error(Definer.auth_err1);
+			}
 
-      async loginData(input) {
-        try {
-       const member = await this.memberModel
-          .findOne(
-            {mb_nick: input.mb_nick}, 
-            {mb_nick: 1, mb_password: 1}
-            )
-          .exec();
+			result.mb_password = '';
 
-          assert.ok(member, Definer.auth_err3);
-         
-          const isMatch = await bcrypt.compare(
-            input.mb_password, 
-            member.mb_password);
-          assert.ok(isMatch, Definer.auth_err4);
+			return result;
+		} catch (err) {
+			throw err;
+		}
+	}
 
-          return await this.memberModel
-          .findOne({
-            mb_nick: input.mb_nick
-          })
-          .exec();
+	async loginData(input) {
+		try {
+			const member = await this.memberModel.findOne({ mb_nick: input.mb_nick }, { mb_nick: 1, mb_password: 1 }).exec();
 
-        } catch (err) {
-          throw err;
-        }
-      }
-      async getChosenMemberData(member, id) { 
-        try{
-          id = shapeIntoMongooseObjectId(id);
-  
-          if (member)
-          { //condition if not viewed before
-            await this.viewChosenItemByMember(member, id, 'member');
-          }
-  
-          const result = await this.memberModel
-            .aggregate([
-              { $match: { _id: id, mb_status: "ACTIVE" } },
-              { $unset: "mb_password" },
-              // todo: check auth member liked the chosen target
-            ])
-            .exec();
-  
-          assert.ok(result, Definer.general_err2);
-          return result[0];
-  
-        } catch(err) {
-          throw err;
-        }
-      }
-    
-    async viewChosenItemByMember(member, view_ref_id, group_type) {
-      try {
-        view_ref_id = shapeIntoMongooseObjectId(view_ref_id);
-        const mb_id = shapeIntoMongooseObjectId(member._id);
-  
-        const view = new View(mb_id);
-  
-        //Validation
-        const isValid = await view.validateChosenTarget(view_ref_id, group_type);
-        assert.ok(isValid, Definer.general_err2);
-  
-        //logged user has viewed target before? target >>> VIew(mb_id);
-        const doesExist = await view.checkViewExistence(view_ref_id);
-        // console.log("doesExist:", doesExist); //checking if this user viewed this resto before
-  
-        if (!doesExist) {
-          const result = await view.insertMemberView(view_ref_id, group_type);
-          assert.ok(result, Definer.general_err1);
-        }      
-     
-        return true;
-  
-      } catch (err) {
-        throw err;
-        }
-    }
-   
+			assert.ok(member, Definer.auth_err3);
+
+			const isMatch = await bcrypt.compare(input.mb_password, member.mb_password);
+			assert.ok(isMatch, Definer.auth_err4);
+
+			return await this.memberModel
+				.findOne({
+					mb_nick: input.mb_nick,
+				})
+				.exec();
+		} catch (err) {
+			throw err;
+		}
+	}
+	async getChosenMemberData(member, id) {
+		try {
+			id = shapeIntoMongooseObjectId(id);
+
+			if (member) {
+				//condition if not viewed before
+				await this.viewChosenItemByMember(member, id, 'member');
+			}
+
+			const result = await this.memberModel
+				.aggregate([
+					{ $match: { _id: id, mb_status: 'ACTIVE' } },
+					{ $unset: 'mb_password' },
+					// todo: check auth member liked the chosen target
+				])
+				.exec();
+
+			assert.ok(result, Definer.general_err2);
+			return result[0];
+		} catch (err) {
+			throw err;
+		}
+	}
+
+	async viewChosenItemByMember(member, view_ref_id, group_type) {
+		try {
+			view_ref_id = shapeIntoMongooseObjectId(view_ref_id);
+			const mb_id = shapeIntoMongooseObjectId(member._id);
+
+			const view = new View(mb_id);
+
+			//Validation
+			const isValid = await view.validateChosenTarget(view_ref_id, group_type);
+			assert.ok(isValid, Definer.general_err2);
+
+			//logged user has viewed target before? target >>> VIew(mb_id);
+			const doesExist = await view.checkViewExistence(view_ref_id);
+			// console.log("doesExist:", doesExist); //checking if this user viewed this resto before
+
+			if (!doesExist) {
+				const result = await view.insertMemberView(view_ref_id, group_type);
+				assert.ok(result, Definer.general_err1);
+			}
+			return true;
+		} catch (err) {
+			throw err;
+		}
+	}
 }
-
 
 module.exports = Member;
