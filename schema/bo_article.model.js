@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {board_article_status_enum_list, board_id_enum_list } = require('../lib/config');
+const { board_article_status_enum_list, board_id_enum_list } = require('../lib/config');
 const Schema = mongoose.Schema;
 
 const boArticleSchema = new mongoose.Schema(
@@ -10,19 +10,19 @@ const boArticleSchema = new mongoose.Schema(
 		bo_id: {
 			type: String,
 			required: true,
-			enum: { 
-				values: board_id_enum_list, 
-				message: '{VALUE} is not among permitted values', 
+			enum: {
+				values: board_id_enum_list,
+				message: '{VALUE} is not among permitted values',
 			},
 		},
 		art_status: {
 			type: String,
 			required: false,
 			default: 'active',
-			enum: { 
-				values: board_article_status_enum_list, 
-				message: '{VALUE} is not among permitted values', 
-			 },
+			enum: {
+				values: board_article_status_enum_list,
+				message: '{VALUE} is not among permitted values',
+			},
 		},
 		art_like: { type: Number, required: false, default: 0 },
 		art_views: { type: Number, required: false, default: 0 },

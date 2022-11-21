@@ -71,4 +71,14 @@ router.post(
 	communityController.createArticle
 );
 
+router.post(
+	"/community/target",
+	memberController.retrieveAuthMember,
+	communityController.getArticles
+);
+router.get(
+	"/community/articles",
+	memberController.retrieveAuthMember,
+	communityController.getMemberArticles
+);
 module.exports = router;
