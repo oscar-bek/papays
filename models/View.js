@@ -18,9 +18,25 @@ class View {
 			switch (group_type) {
 				case 'member':
 					result = await this.memberModel
-						.findById({
+						.findOne({
 							_id: view_ref_id,
 							mb_status: 'ACTIVE',
+						})
+						.exec();
+					break;
+				case 'product':
+					result = await this.productModel
+						.findOne({
+							_id: view_ref_id,
+							product_status: 'PROCESS',
+						})
+						.exec();
+					break;
+				case 'community':
+					result = await this.boArticleModel
+						.findOne({
+							_id: view_ref_id,
+							art_status: 'active',
 						})
 						.exec();
 					break;
@@ -63,6 +79,7 @@ class View {
 						)
 						.exec();
 					break;
+
 				case 'product':
 					await this.productModel
 						.findByIdAndUpdate(
@@ -70,6 +87,16 @@ class View {
 								_id: view_ref_id,
 							},
 							{ $inc: { product_views: 1 } },
+						)
+						.exec();
+					break;
+				case 'community':
+					await this.boArticleModel
+						.findByIdAndUpdate(
+							{
+								_id: view_ref_id,
+							},
+							{ $inc: { art_views: 1 } },
 						)
 						.exec();
 					break;

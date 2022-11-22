@@ -84,11 +84,13 @@ class Member {
 
 			//Validation
 			const isValid = await view.validateChosenTarget(view_ref_id, group_type);
+			console.log('isValid:', isValid);
 			assert.ok(isValid, Definer.general_err2);
 
 			//logged user has viewed target before? target >>> VIew(mb_id);
 			const doesExist = await view.checkViewExistence(view_ref_id);
-			// console.log("doesExist:", doesExist); //checking if this user viewed this resto before
+			console.log('doesExist:', doesExist);
+			//checking if this user viewed this resto before
 
 			if (!doesExist) {
 				const result = await view.insertMemberView(view_ref_id, group_type);
