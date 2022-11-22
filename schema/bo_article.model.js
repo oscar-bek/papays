@@ -6,7 +6,7 @@ const boArticleSchema = new mongoose.Schema(
 	{
 		art_subject: { type: String, required: true },
 		art_content: { type: String, required: true },
-		art_image: { type: String, required: true },
+		art_image: { type: String, required: false },
 		bo_id: {
 			type: String,
 			required: true,
