@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {  } = require('../lib/config.js');
 const Schema = mongoose.Schema;
 
 const followSchema = new mongoose.Schema(
