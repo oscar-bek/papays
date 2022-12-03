@@ -1,9 +1,14 @@
-const MemberModel = require('../schema/member.model');
-const Definer = require('../lib/mistake');
-const assert = require('assert');
-const bcrypt = require('bcryptjs');
-const View = require('./View');
-const { shapeIntoMongooseObjectId, lookup_auth_member_following, lookup_auth_member_liked } = require('../lib/config');
+const MemberModel = require("../schema/member.model");
+const Definer = require("../lib/mistake");
+const assert = require("assert");
+const bcrypt = require("bcrypt");
+const {
+  shapeIntoMongooseObjectId,
+  lookup_auth_member_following,
+  lookup_auth_member_liked,
+} = require("../lib/config");
+const View = require("./View");
+const Like = require("./Like");
 
 class Member {
 	constructor() {

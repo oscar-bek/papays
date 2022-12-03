@@ -23,6 +23,13 @@ router.get('/member/:id',
 memberController.retrieveAuthMember, 
 memberController.getChosenMember); //param orqali
 
+router.post(
+  "/member-liken",
+  memberController.retrieveAuthMember,
+  memberController.likeMemberChosen
+);
+
+
 // Products ga dahldor routerlar
 router.post(
 	'/products',
