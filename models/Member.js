@@ -3,7 +3,7 @@ const Definer = require('../lib/mistake');
 const assert = require('assert');
 const bcrypt = require('bcryptjs');
 const View = require('./View');
-const { shapeIntoMongooseObjectId } = require('../lib/config');
+const { shapeIntoMongooseObjectId, lookup_auth_member_following, lookup_auth_member_liked } = require('../lib/config');
 
 class Member {
 	constructor() {
@@ -53,22 +53,23 @@ class Member {
 	}
 	async getChosenMemberData(member, id) {
 		try {
+			const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
 			id = shapeIntoMongooseObjectId(id);
+			console.log('member:::', member);
+
+			let aggregateQuery = [{ $match: { _id: id, mb_status: 'ACTIVE' } }, { $unset: 'mb_password' }];
 
 			if (member) {
-				//condition if not viewed before
+				// condition if not seen before
 				await this.viewChosenItemByMember(member, id, 'member');
+				aggregateQuery.push(lookup_auth_member_liked(auth_mb_id));
+				aggregateQuery.push(lookup_auth_member_following(auth_mb_id, 'members'));
 			}
 
-			const result = await this.memberModel
-				.aggregate([
-					{ $match: { _id: id, mb_status: 'ACTIVE' } },
-					{ $unset: 'mb_password' },
-					// todo: check auth member liked the chosen target
-				])
-				.exec();
+			const result = await this.memberModel.aggregate(aggregateQuery).exec();
 
 			assert.ok(result, Definer.general_err2);
+
 			return result[0];
 		} catch (err) {
 			throw err;
@@ -97,6 +98,37 @@ class Member {
 				assert.ok(result, Definer.general_err1);
 			}
 			return true;
+		} catch (err) {
+			throw err;
+		}
+	}
+
+	async likeChosenItemByMember(member, like_ref_id, group_type) {
+		try {
+			like_ref_id = shapeIntoMongooseObjectId(like_ref_id);
+			const mb_id = shapeIntoMongooseObjectId(member._id);
+
+			const like = new Like(mb_id);
+			const isValid = await like.validateTargetItem(like_ref_id, group_type);
+			console.log('isValid:::', isValid);
+			assert.ok(isValid, Definer.general_err2);
+
+			// doesExist
+			const doesExist = await like.checkLikeExistance(like_ref_id);
+			console.log('doesExist:::', doesExist);
+
+			let data = doesExist
+				? await like.removeMemberLike(like_ref_id, group_type)
+				: await like.insertMemberLike(like_ref_id, group_type);
+			assert.ok(data, Definer.general_err1);
+
+			const result = {
+				like_group: data.like_group,
+				like_ref_id: data.like_ref_id,
+				like_status: doesExist ? -1 : 1,
+			};
+
+			return result;
 		} catch (err) {
 			throw err;
 		}
