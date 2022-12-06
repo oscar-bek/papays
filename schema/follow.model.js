@@ -11,4 +11,4 @@ const followSchema = new mongoose.Schema(
 
 followSchema.index({follow_id: 1, subscriber_id: 1}, { unique: true});
 
-module.exports = mongoose.model('Folow', followSchema);
+module.exports = mongoose.model('Follow', followSchema);

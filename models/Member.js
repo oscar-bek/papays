@@ -62,13 +62,17 @@ class Member {
 			id = shapeIntoMongooseObjectId(id);
 			console.log('member:::', member);
 
-			let aggregateQuery = [{ $match: { _id: id, mb_status: 'ACTIVE' } }, { $unset: 'mb_password' }];
+			let aggregateQuery = [
+				{ $match: { _id: id, mb_status: 'ACTIVE' } }, 
+				{ $unset: 'mb_password' }];
 
 			if (member) {
 				// condition if not seen before
 				await this.viewChosenItemByMember(member, id, 'member');
 				aggregateQuery.push(lookup_auth_member_liked(auth_mb_id));
-				aggregateQuery.push(lookup_auth_member_following(auth_mb_id, 'members'));
+				aggregateQuery.push(
+					lookup_auth_member_following(auth_mb_id, 'members')
+					);
 			}
 
 			const result = await this.memberModel.aggregate(aggregateQuery).exec();

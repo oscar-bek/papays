@@ -1,8 +1,5 @@
 const assert = require('assert');
-const { 
-	shapeIntoMongooseObjectId,  
-	lookup_auth_member_liked, 
-} = require('../lib/config');
+const { shapeIntoMongooseObjectId, lookup_auth_member_liked } = require('../lib/config');
 const Definer = require('../lib/mistake');
 const ProductModel = require('../schema/product.model');
 const Member = require('./Member');
@@ -25,12 +22,16 @@ class Product {
 			const sort = data.order === 'product_price' ? { [data.order]: 1 } : { [data.order]: -1 };
 
 			const result = await this.productModel
-				.aggregate([{ $match: match }, { $sort: sort }, { $skip: data['page'] * 1 - 1 }, { $limit: data['limit'] * 1 }])
+				.aggregate([
+					{ $match: match },
+					{ $sort: sort },
+					{ $skip: data['page'] * 1 - 1 },
+					{ $limit: data['limit'] * 1 },
+					lookup_auth_member_liked(auth_mb_id),
+				])
 				.exec();
 
 			console.log(result);
-
-			//todo: check auth member likes or not product;
 
 			assert.ok(result, Definer.general_err1);
 			return result;
@@ -50,10 +51,7 @@ class Product {
 			}
 
 			const result = await this.productModel
-				.aggregate([
-					{ $match: { _id: id, product_status: 'PROCESS' } },
-					// todo: check id auth member likes product
-				])
+				.aggregate([{ $match: { _id: id, product_status: 'PROCESS' } }, lookup_auth_member_liked(auth_mb_id)])
 				.exec();
 
 			assert.ok(result, Definer.general_err1);
@@ -65,12 +63,11 @@ class Product {
 
 	async getAllProductDataResto(member) {
 		try {
-			member._id = shapeIntoMongooseObjectId(member._id);
 			const result = await this.productModel.find({
 				restaurant_mb_id: member._id,
 			});
 			assert.ok(result, Definer.general_err1);
-
+			console.log(result);
 			return result;
 		} catch (err) {
 			throw err;

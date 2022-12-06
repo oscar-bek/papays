@@ -28,16 +28,16 @@ memberController.login = async (req, res) => {
     try {
         console.log("POST: cont/login");
         const data = req.body,
-              member = new Member(),
-              result = await member.loginData(data);
+            member = new Member(),
+            result = await member.loginData(data);
 
-              const token = memberController.createToken(result);
-              res.cookie("access_token", token, {
-                  maxAge: 6 * 3600 * 1000,
-                  httpOnly: true,
-              });
+        const token = memberController.createToken(result);
+        res.cookie("access_token", token, {
+            maxAge: 6 * 3600 * 1000,
+            httpOnly: true,
+        });
       
-              res.json({ state: "success", data: result });
+      res.json({ state: "success", data: result });
     } catch (err) {
         console.log(`ERROR, cont/login, ${err.message}`);
         res.json({ state: "fail", message: err.message });
