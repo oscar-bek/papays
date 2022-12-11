@@ -39,7 +39,7 @@ const {
         }
     },
    
-    mb_address: {
+    mb_adress: {
         type: String,
         required: false,
     },
