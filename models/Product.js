@@ -1,4 +1,4 @@
-const assert = require('assert');
+// const assert = require('assert');
 const { shapeIntoMongooseObjectId, lookup_auth_member_liked } = require('../lib/config');
 const Definer = require('../lib/mistake');
 const ProductModel = require('../schema/product.model');
@@ -101,6 +101,7 @@ class Product {
 				.exec();
 
 			assert.ok(result, Definer.general_err1);
+			
 			return result;
 		} catch (err) {
 			throw err;

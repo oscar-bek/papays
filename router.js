@@ -6,8 +6,8 @@ const restaurantController = require('./controllers/restaurantController');
 const orderController = require('./controllers/orderController');
 const followController = require('./controllers/followController');
 const communityController = require('./controllers/communityController');
-const uploader_community = require("./utils/upload-multer")("community");
-const uploader_member = require("./utils/upload-multer")("member");
+const uploader_community = require('./utils/upload-multer')('community');
+const uploader_member = require('./utils/upload-multer')('members');
 
 /*************************************
  *         REST API                  *
@@ -19,16 +19,15 @@ router.post('/signup', memberController.signup);
 router.post('/login', memberController.login);
 router.get('/logout', memberController.logout);
 router.get('/check-me', memberController.checkMyAuthentication);
-router.get('/member/:id', 
-memberController.retrieveAuthMember, 
-memberController.getChosenMember); //param orqali
+router.get('/member/:id', memberController.retrieveAuthMember, memberController.getChosenMember); //param orqali
 
+router.post('/member-liken', memberController.retrieveAuthMember, memberController.likeMemberChosen);
 router.post(
-  "/member-liken",
-  memberController.retrieveAuthMember,
-  memberController.likeMemberChosen
+	'/member/update',
+	memberController.retrieveAuthMember,
+	uploader_member.single('mb_image'),
+	memberController.updateMember,
 );
-
 
 // Products ga dahldor routerlar
 router.post(
@@ -38,85 +37,34 @@ router.post(
 	productController.getAllProducts,
 );
 
-router.get('/products/:id', 
-memberController.retrieveAuthMember, 
-productController.getChosenProduct);
+router.get('/products/:id', memberController.retrieveAuthMember, productController.getChosenProduct);
 //param orqali
 
 //Restaurant related routers
-router.get('/restaurants',
- memberController.retrieveAuthMember, 
- restaurantController.getRestaurants);
-router.get('/restaurants/:id',
- memberController.retrieveAuthMember, 
- restaurantController.getChosenRestaurant
- );
+router.get('/restaurants', memberController.retrieveAuthMember, restaurantController.getRestaurants);
+router.get('/restaurants/:id', memberController.retrieveAuthMember, restaurantController.getChosenRestaurant);
 
 // Order related routers
-router.post('/orders/create',
- memberController.retrieveAuthMember,
-  orderController.createOrder
-	);
-router.get('/orders',
- memberController.retrieveAuthMember, 
- orderController.getMyOrders
- );
-router.post(
-	"/orders/edit", 
- memberController.retrieveAuthMember,
- orderController.editChosenOrder
-);
+router.post('/orders/create', memberController.retrieveAuthMember, orderController.createOrder);
+router.get('/orders', memberController.retrieveAuthMember, orderController.getMyOrders);
+router.post('/orders/edit', memberController.retrieveAuthMember, orderController.editChosenOrder);
 
 // Community related routers
-router.post(
-	"/community/image",
-	uploader_community.single("community_image"),
-	communityController.imageInsertion
-	);
-router.post(
-	"/community/create",
-	memberController.retrieveAuthMember,
-	communityController.createArticle
-);
+router.post('/community/image', uploader_community.single('community_image'), communityController.imageInsertion);
+router.post('/community/create', memberController.retrieveAuthMember, communityController.createArticle);
 
-router.post(
-	"/community/target",
-	memberController.retrieveAuthMember,
-	communityController.getArticles
-);
+router.post('/community/target', memberController.retrieveAuthMember, communityController.getArticles);
+router.get('/community/articles', memberController.retrieveAuthMember, communityController.getMemberArticles);
+router.get('/community/target', memberController.retrieveAuthMember, communityController.getArticles);
 router.get(
-	"/community/articles",
+	'/community/single-article/:art_id',
 	memberController.retrieveAuthMember,
-	communityController.getMemberArticles
+	communityController.getChosenArticle,
 );
-router.get(
-	"/community/target",
-	memberController.retrieveAuthMember,
-	communityController.getArticles
-);
-router.get(
-	"/community/single-article/:art_id",
-	memberController.retrieveAuthMember,
-	communityController.getChosenArticle
-);
-
 
 //Following related routers
-router.post(
-	"/follow/subscribe",
-	memberController.retrieveAuthMember,
-	followController.subscribe
-);
-router.post(
-	"/follow/unsubscribe",
-	memberController.retrieveAuthMember,
-	followController.unsubscribe
-);
-router.get("/follow/followings", followController.getMemberFollowings 
-);
-router.get(
-  "/follow/followers",
-  memberController.retrieveAuthMember,
-  followController.getMemberFollowers
-);
+router.post('/follow/subscribe', memberController.retrieveAuthMember, followController.subscribe);
+router.post('/follow/unsubscribe', memberController.retrieveAuthMember, followController.unsubscribe);
+router.get('/follow/followings', followController.getMemberFollowings);
+router.get('/follow/followers', memberController.retrieveAuthMember, followController.getMemberFollowers);
 module.exports = router;
