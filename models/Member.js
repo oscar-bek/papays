@@ -163,7 +163,6 @@ class Member {
 				{ runValidators: true, lean: true, returnDocument: "after", }
 			).exec();
 			assert.ok(result, Definer.general_err1);
-			console.log("result:::",result);
 			return result;
 		} catch(err) {
 			throw err;
